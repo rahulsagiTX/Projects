@@ -1,0 +1,65 @@
+---
+title: "INFO 3010 - Assignment 7"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Fall 2019 by Lingzi Hong
+## Due: Monday, Nov 4, 2019
+### Instructions
+1. This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button, all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+2. Please download the snowstorm.json from canvas. Fill in the code chunks for following question and submit this R markdown file to the assignment on Canvas. Make sure when you save that you have run all cells, so the outputs displace between the cells.
+3. make sure to replace the directoryID in the filename with your student ID. 
+
+
+### Q1. (5pts) Read the file "2015.csv" to a dataframe. Have a statistical summary of the dataset. 
+```{r}
+
+  setwd('/Users/rahulsagi/Downloads')
+  c2015 <- read.csv('2015.csv', header = TRUE, sep = ",")
+  summary(c2015)
+
+```
+
+### Q2. (5pts) Draw a plot with box plot of Happiness_Score for countries in each Region group.
+```{r}
+
+  boxplot(Happiness_Score~Region, data = c2015, main = "Happiness Score For Each Region", xlab = "Region", ylab = "Happiness Score")
+
+```
+
+### Q3. (10pts) Draw a scatter plot matrix for variables: Happiness_Score, Family, Life_Expectancy and Generosity
+```{r}
+
+  pairs(~Happiness_Score + Family + Life_Expectancy + Generosity, data = c2015, main = "Scatter Plot Matrix for 2015")
+
+```
+
+### Q4. (10pts) Build a linear regression model to predict Life_Expectancy with Hapiness_Score, GDP_per_Capita, Family and Government_Corruption. 
+```{r}
+
+  linearModel2015 <- lm(Life_Expectancy~Happiness_Score + GDP_per_Capita + Family + Government_Corruption, data = c2015)
+  linearModel2015
+
+```
+
+
+### Q6. (10pts) Check model details. Answer the following questions out of code box: What is the adjusted R-squared value? Is the linear relation significant? 
+
+```{r}
+
+  summary(linearModel2015)
+
+```
+The adjusted R-squared value is 0.3901. The linear relation in general is significant due to the p-value being less than 0.05, but Life Expectancy is only statistically significant to Government_Corruption and Happiness_Score due to both having a p-value less than 0.05. The other columns have a p-value greater than 0.05.
+
+### Q7. (10pts) Draw diagnostic plots for the model in Q6. 
+```{r}
+
+  plot(linearModel2015)
+
+```
+
