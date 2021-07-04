@@ -1,0 +1,83 @@
+---
+title: "INFO 3010 - Assignment 4"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Fall 2019 by Lingzi Hong
+## Due: Monday, Sep 30, 2019
+### Instructions
+1. This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button, all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+2. Please download the snowstorm.json from canvas. Fill in the code chunks for following question and submit this R markdown file to the assignment on Canvas. Make sure when you save that you have run all cells, so the outputs displace between the cells.
+3. make sure to replace the directoryID in the filename with your student ID. 
+
+
+### Q1. (5pts) Import the json file to R
+```{r}
+
+  library(rjson)
+  library(jsonlite)
+
+  setwd('/Users/rahulsagi/Downloads')
+  
+  json_file <- "snowstorm_sample.json"
+  snow_tweets <- stream_in(file(json_file))
+
+```
+
+### Q2. (5pts) How many records are there in the json file?
+```{r}
+
+  nrow(snow_tweets)
+
+```
+
+### Q3. (5pts) Extract information of 'created_at', 'id_str', 'id' of 'user', 'name' of 'user', 'full_name' of 'place', 'place_type' of 'place' from the json file and generate 6 vectors named as 'create_at', 'tweet_id', 'user_id','user_name','place_name','place_type'.
+```{r}
+
+  create_at = snow_tweets$created_at
+  tweet_id = snow_tweets$user$id_str
+  user_id = snow_tweets$user$id
+  user_name = snow_tweets$user$name
+  place_name = snow_tweets$place$full_name
+  place_type = snow_tweets$place$place_type
+```
+
+### Q4. (5pts) Create a dataframe with the 6 vectors.
+```{r}
+
+  snow <- data.frame(create_at, tweet_id, user_id, user_name, place_name, place_type)
+
+```
+
+### Q5. (5pts) Check the first 10 lines of the data frame.
+```{r}
+
+  head(snow, 10)
+
+```
+
+### Q6. (5pts) How many tweets are labeled with a place_type as 'city'?
+```{r}
+  
+  nrow(snow[snow$place_type == 'city', ])
+
+```
+
+### Q7. (10pts) How many unique users are there in the dataset?
+```{r}
+
+  length(unique(snow$user_name))
+
+```
+
+### Q8. (10pts) How many tweets have place_name as 'Washington, DC'
+```{r}
+
+  nrow(snow[snow$place_name == 'Washington, DC', ])
+
+```
+
