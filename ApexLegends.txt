@@ -1,0 +1,148 @@
+create database ApexLegends;
+use ApexLegends;
+
+
+CREATE TABLE HeroProfile (
+    HeroID INT NOT NULL,
+    HeroName VARCHAR (50) NOT NULL,
+    Finisher VARCHAR (50) NOT NULL,
+    LegendType VARCHAR (50) NOT NULL,
+    AbilityId INT NOT NULL,
+    WeaponId INT NOT NULL,
+    ItemID INT NOT NULL,
+	    Primary Key(HeroID),
+	    FOREIGN KEY (WeaponId) REFERENCES WeaponHero (WeaponId),
+	    FOREIGN KEY (AbilityId) REFERENCES AbilityHero (AbilityId),
+	    FOREIGN KEY (ItemID) REFERENCES ItemHero (ItemID));
+	   
+CREATE TABLE ItemHero (
+	ItemID INT NOT NULL,
+		PRIMARY KEY(ItemID),
+	VestId INT NOT NULL,
+	HelmetId INT NOT NULL,
+	ShieldId INT NOT NULL,
+	ExtendedMagId INT NOT NULL,
+	StockId INT NOT NULL,
+	BarrelStabilizerId INT NOT NULL,
+	SpecialAbilityId INT NOT NULL,
+	ShieldRechargeId INT NOT NULL,
+	GradeDesc VARCHAR(60) NOT NULL,
+	HealthID INT NOT NULL,
+		FOREIGN KEY (VestId) REFERENCES Vest (VestId),
+		FOREIGN KEY (HelmetId) REFERENCES Helmet (HelmetId),
+		FOREIGN KEY (ShieldId) REFERENCES Shield (ShieldId),
+		FOREIGN KEY (ExtendedMagId) REFERENCES ExtendedMag (ExtendedMagId),
+		FOREIGN KEY (StockId) REFERENCES Stock (StockId),
+		FOREIGN KEY (BarrelStabilizerId) REFERENCES BarStab (BarrelStabilizerId),
+		FOREIGN KEY (SpecialAbilityId) REFERENCES SpecialAbility (SpecialAbilityId),
+		FOREIGN KEY (ShieldRechargeId) REFERENCES ShieldRecharge (ShieldRechargeId),
+		FOREIGN KEY (HealthId) REFERENCES Health (HealthId));
+	
+CREATE TABLE Vest (
+	VestId INT NOT NULL,
+		PRIMARY KEY (VestId),
+	VestGrade VARCHAR (50) NOT NULL,
+	VestGauges VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE Helmet (
+	HelmetId INT NOT NULL,
+		PRIMARY KEY (HelmetId),
+	HelmetGrade VARCHAR (50) NOT NULL,
+	HelmetGauges VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE Shield (
+	ShieldId INT NOT NULL,
+		PRIMARY KEY (ShieldId),
+	ShieldGrade VARCHAR (50) NOT NULL,
+	ShieldGauges VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE ExtendedMag (
+	ExtendedMagId INT NOT NULL,
+		PRIMARY KEY (ExtendedMagId),
+	ExMagGrade VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE Stock (
+	StockId INT NOT NULL,
+		PRIMARY KEY (StockId),
+	StockGrade VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE BarStab (
+	BarrelStabilizerId INT NOT NULL,
+		PRIMARY KEY (BarrelStabilizerId),
+	BarStabGrade VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE SpecialAbility (
+	SpecialAbilityId INT NOT NULL,
+		PRIMARY KEY (SpecialAbilityId),
+	SpecialAbilityName VARCHAR (50) NOT NULL,
+	SpecialAbilityProperty VARCHAR (50) NOT NULL,
+	SpecialAbilityGrade VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE ShieldRecharge (
+	ShieldRechargeId INT NOT NULL,
+		PRIMARY KEY (ShieldRechargeId),
+	ShRechGrade VARCHAR (50) NOT NULL,
+	ShRechProp VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE Health (
+	HealthId INT NOT NULL,
+		PRIMARY KEY (HealthId),
+	HealthItem VARCHAR (50) NOT NULL,
+	HealthItemGrade VARCHAR (50) NOT NULL,
+	HealthItemProperty VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE AbilityHero (
+	AbilityId INT NOT NULL,
+		PRIMARY KEY(AbilityId),
+	AbilityName VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE WeaponHero (
+	WeaponID INT NOT NULL,
+		PRIMARY KEY(WeaponID),
+	WeaponType VARCHAR (50) NOT NULL,
+	GunID INT NOT NULL,
+	ScopeID INT NOT NULL,
+		FOREIGN KEY (GunID) REFERENCES GunDamage (GunID),
+		FOREIGN KEY (ScopeID) REFERENCES ScopeFactor (ScopeID));
+	
+CREATE TABLE ScopeFactor (
+	ScopeId INT NOT NULL,
+		PRIMARY KEY (ScopeId),
+	ScopeDesc VARCHAR (50) NOT NULL,
+	Reticle VARCHAR (50) NOT NULL,
+	Grade VARCHAR (50) NOT NULL
+);
+	
+CREATE TABLE GunDamage (
+	GunID INT NOT NULL,
+		PRIMARY KEY(GunID),
+	AmmoType VARCHAR (50) NOT NULL,
+	GunName VARCHAR (50) NOT NULL,
+	MagSize  INT NOT NULL,
+	BodyShot INT NOT NULL,
+	HeadShot INT NOT NULL,
+	BodyShotPerMag INT NOT NULL,
+	HeadShotPerMag INT NOT NULL,
+	Pattern VARCHAR (50),
+	BodyPerHead VARCHAR (50),
+	FireModeId INT NOT NULL,
+	WeaponID INT NOT NULL,
+		FOREIGN KEY (FireModeId) REFERENCES FireMode (FireModeId),
+		FOREIGN KEY (WeaponID) REFERENCES WeaponHero (WeaponID));
+	
+CREATE TABLE FireMode (
+	FireModeId INT NOT NULL,
+		PRIMARY KEY(FireModeId),
+	FireModeType VARCHAR (50) NOT NULL);
+
+
