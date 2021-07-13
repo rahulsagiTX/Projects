@@ -1,5 +1,5 @@
 ---
-title: "FinalReport"
+title: "IncomeClassification"
 output: pdf_document
 ---
 
