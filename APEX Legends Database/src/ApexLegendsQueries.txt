@@ -1,0 +1,40 @@
+///SQL QUERY #1
+SELECT HeroName, Finisher
+FROM HeroProfile
+WHERE LegendType = 'Support'
+ORDER BY HeroName DESC;
+
+///SQL QUERY #2
+SELECT WeaponHero.WeaponType, GunDamage.GunName, GunDamage.AmmoType
+FROM GunDamage
+JOIN WeaponHero ON WeaponHero.WeaponID = GunDamage.WeaponID;
+
+///SQL QUERY #3
+SELECT Vest.VestGrade, Helmet.HelmetGrade, Shield.ShieldGrade,
+    ExtendedMag.ExMagGrade, Stock.StockGrade, BarStab.BarStabGrade, 
+    SpecialAbility.SpecialAbilityGrade, ShieldRecharge.ShRechGrade,
+    Health.HealthItemGrade, ItemHero.GradeDesc
+FROM ItemHero
+JOIN Vest ON ItemHero.VestID = Vest.VestID
+JOIN Helmet ON ItemHero.HelmetId = Helmet.HelmetId
+JOIN Shield ON ItemHero.ShieldId = Shield.ShieldId
+JOIN ExtendedMag ON ItemHero.ExtendedMagId = ExtendedMag.ExtendedMagId
+JOIN Stock ON ItemHero.StockId = Stock.StockId
+JOIN BarStab ON ItemHero.BarrelStabilizerId = BarStab.BarrelStabilizerId
+JOIN SpecialAbility ON ItemHero.SpecialAbilityId = SpecialAbility.SpecialAbilityId
+JOIN ShieldRecharge ON ItemHero.ShieldRechargeId = ShieldRecharge.ShieldRechargeId
+JOIN Health ON ItemHero.HealthId = Health.HealthId;
+
+///SQL QUERY #4
+SELECT AmmoType, MIN(HeadShot) AS 'Minimum Head Shot', MAX(HeadShot) AS 'Maximum HeadShot',
+ROUND(AVG(HeadShot), 2)
+FROM GunDamage
+GROUP BY AmmoType;
+
+///SQL QUERY #5
+SELECT WeaponType
+FROM WeaponHero
+WHERE GunID IN
+    (SELECT GunID
+    FROM GunDamage
+    WHERE BodyShotPerMag > 500 OR HeadShotPerMag > 700);
