@@ -1,5 +1,5 @@
 # My Project Catalog
-This repo. contains the various projects I have done during these past few years for work, capstone, or personal assignments. I have used various programming languages for these projects such as Python, R, and SQL and/or data science tools such as Tableau. 
+This repo. contains my work, capstone, and personal projects. I have used various programming languages for these projects such as Python, R, and SQL as well as data science tools such as Tableau, RapidMiner, and KNIME. 
 
 ## Python Projects
 * COVID-19 EDA
